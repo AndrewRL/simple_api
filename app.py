@@ -20,20 +20,20 @@ def write_pos_file(pos_data, outfile):
 
 @app.route('/api/v1/positions', methods=['GET'])
 def get_positions():
-    return jsonify(read_csv('/home/ec2-user/test_positions.csv'))
+    return jsonify(read_csv('/home/ec2-user/positions.csv'))
 
 @app.route('/api/v1/positions', methods=['POST'])
 def add_positions():
     if not request.json or not 'positions' in request.json:
         abort(400)
-    
+    '''
     all_positions = read_csv('/home/ec2-user/test_positions.csv')
     # create a list of position data from post + test_positions.csv
     all_positions.extend(request.json['positions'])
     # sort data by timestamp
     all_positions = sorted(all_positions, key=lambda x: float(x[1]))
-    # save data to positions.csv
-    write_pos_file(all_positions, 'positions.csv')
+    '''
+    write_pos_file(request.json['positions'], 'positions.csv')
     return jsonify({'success': True}), 201
 
 if __name__ == '__main__':
