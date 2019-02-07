@@ -23,7 +23,7 @@ def add_positions():
         abort(400)
     
     # load positions from csv
-    test_positions = read_csv('home/ec2-user/test_positions.csv')
+    test_positions = read_csv('/home/ec2-user/test_positions.csv')
     # create a list of position data from post + test_positions.csv
     all_positions = test_positions + request.json['positions']
     # sort data by timestamp
