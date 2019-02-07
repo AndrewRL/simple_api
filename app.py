@@ -19,7 +19,7 @@ def get_positions():
 
 @app.route('/api/v1/positions', methods=['POST'])
 def add_positions():
-    if not request.json or not 'title' in request.json:
+    if not request.json or not 'positions' in request.json:
         abort(400)
     
     # load positions from csv
