@@ -13,7 +13,7 @@ def read_csv(path, skiplines=True, header=True):
             data.append(row)
     return data
 
-def write_pos_file(pos_data, outfile):
+def append_to_pos_file(pos_data, outfile):
     with open(outfile, 'a', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerows([row for row in pos_data])
@@ -33,7 +33,7 @@ def add_positions():
     # sort data by timestamp
     all_positions = sorted(all_positions, key=lambda x: float(x[1]))
     '''
-    write_pos_file(request.json['positions'], 'positions.csv')
+    append_to_pos_file(request.json['positions'], 'positions.csv')
     return jsonify({'success': True}), 201
 
 if __name__ == '__main__':
