@@ -36,7 +36,7 @@ def add_positions():
     print(all_positions)
     # save data to positions.csv
     write_pos_file(all_positions, 'positions.csv')
-    return {'success': True}
+    return jsonify({'success': True}), 201
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
