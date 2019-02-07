@@ -13,6 +13,11 @@ def read_csv(path, skiplines=True, header=True):
             data.append(row)
     return data
 
+def write_pos_file(pos_data, outfile):
+    with open(outfile, 'a', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow([row for row in pos_data])
+
 @app.route('/api/v1/positions', methods=['GET'])
 def get_positions():
     return jsonify(read_csv('/home/ec2-user/test_positions.csv'))
@@ -30,6 +35,8 @@ def add_positions():
     all_positions = sorted(all_positions, key=lambda x: float(x[1]))
     print(all_positions)
     # save data to positions.csv
+    write_pos_file(all_positions, 'positions.csv')
+    return {'success': True}
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
